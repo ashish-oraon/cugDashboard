@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-header bg-primary text-center text-white h2 font-weight-bold">
-    CUG ALLOCATION REPORT <i class="fas fa-sync" (click) = 'populate()'></i>
+    CUG ALLOCATION REPORT <i class="fas fa-sync pointer-cursor text-success" (click)='populate()'></i>
   </div>
   <div class="card-body">
-
+    <div class="spinner-grow text-warning mx-auto" *ngIf="loaderVisibility"></div>
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
   </div>

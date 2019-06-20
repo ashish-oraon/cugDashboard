@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 // import * as CanvasJS from "canvasjs";
-import * as CanvasJS from '../../assets/canvasjs.min'
+import * as CanvasJS from '../../assets/canvasjs.min';
 
 @Component({
   selector: 'app-cug-allocation',
@@ -9,7 +9,7 @@ import * as CanvasJS from '../../assets/canvasjs.min'
   styleUrls: ['./cug-allocation.component.css']
 })
 export class CugAllocationComponent implements OnInit {
-
+  loaderVisibility:boolean = true;
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
@@ -17,8 +17,11 @@ export class CugAllocationComponent implements OnInit {
   }
 
   populate() {
-    this._dataService.getCugAllocationData().subscribe((data) => {
+    this.loaderVisibility = true;
+    console.log('populate click event');
+    this._dataService.getCugAllocationData({'type':'cug_allocation'}).subscribe((data) => {
       console.log(data);
+      this.loaderVisibility = false;
       let chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
         exportEnabled: true,
@@ -38,7 +41,6 @@ export class CugAllocationComponent implements OnInit {
           dataPoints: data
         }]
       });
-
       chart.render();
 
     });

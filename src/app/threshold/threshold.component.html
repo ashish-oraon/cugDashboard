@@ -1,30 +1,46 @@
 <div class="card">
   <div class="card-header">
-    <div class="container">
-      <label for="" class="text-muted">Select Month</label>
-      <select name="" id="threshold_month">
-
-      </select>
-      <label for="" class="text-muted">Select Year</label>
-      <select name="" id="threshold_year">
-
-        <option value="2018">
-          2018
-        </option>
-
-
-        <option value="2019">
-          2019
-        </option>
-
-
-      </select>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <label for="" class="text-muted">Select Month</label>
+          <select class="form-control" [(ngModel)]="thresholdMonthSelected" (change)=changeChartData()>
+            <option [value]="month.value" *ngFor="let month of months">{{month.title}}</option>
+          </select>
+        </div>
+        <div class="col-sm-6">
+          <label for="" class="text-muted">Select Year</label>
+          <select name="" class="form-control" [(ngModel)]="thresholdYearSelected" (change)=changeChartData()>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+          </select>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card-body">
     <div class="row">
       <div class="col-6">
+        <div class="spinner-grow text-warning mx-auto" *ngIf="barLoaderVisibility"></div>
+        <div id="barChartContainer" style="height: 370px; width: 100%;"></div>
+      </div>
+      <div class="col-6">
+        <!-- <div class="spinner-grow text-warning mx-auto" *ngIf="pieLoaderVisibility"></div> -->
+        <div id="pieChartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
       </div>
     </div>
   </div>
 </div>
+
+
+<!-- <div class="container bg-secondary">
+    <mz-select-container class="col s6">
+        <select mz-select
+          id="options-select"
+          [label]="'Label'"
+          [placeholder]="'Select a Title'"
+          [(ngModel)]="editTherapist.title">
+          <option *ngFor="let title of titles" [value]="title.value">{{ title.text }}</option>
+        </select>
+      </mz-select-container>
+</div> -->

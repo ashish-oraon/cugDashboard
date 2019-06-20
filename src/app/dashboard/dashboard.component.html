@@ -1,13 +1,27 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3 h-100 bg-danger">
-      <ul class="list-group">
-        <li class="list-item">Orphan CUG</li>
-        <li class="list-item">Upload Bill</li>
-        <li class="list-item">Allocation Report</li>
+    <div class="col-md-2 bg-danger shadow text-center text-white side-nav p-2 pt-4 position-fixed"
+      style="height:90%;min-height: 700px;">
+      <h3>Dashboard</h3>
+
+      <ul class="list-group list-group-flush bg-danger font-weight-bold text-white text-right">
+
+        <a href="#chartContainer">
+          <li class="list-group-item bg-danger font-weight-bold text-white">Main Dashboard</li>
+        </a>
+        <a href="#orphanDiv">
+          <li class="list-group-item bg-danger font-weight-bold text-white ">Orphan CUG</li>
+        </a>
+        <a href="#fileUploadDiv">
+          <li class="list-group-item bg-danger font-weight-bold text-white">Upload bill</li>
+        </a>
+
+        <a href="#HodNonhodDiv">
+          <li class="list-group-item bg-danger font-weight-bold text-white">Allocation Report</li>
+        </a>
       </ul>
     </div>
-    <div class="col-9">
+    <div class="offset-2 col-10">
       <app-cug-allocation></app-cug-allocation>
       <app-threshold></app-threshold>
     </div>
