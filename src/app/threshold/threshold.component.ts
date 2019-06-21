@@ -11,6 +11,8 @@ export class ThresholdComponent implements OnInit {
   barLoaderVisibility: boolean = true;
   pieLoaderVisibility: boolean = true;
 
+  ChartMessageVisibility: boolean;
+
   thresholdMonthSelected: string;
   thresholdYearSelected: string;
 
@@ -65,14 +67,12 @@ export class ThresholdComponent implements OnInit {
     }
   ];
 
-
-
-
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
     this.thresholdMonthSelected = '10';
     this.thresholdYearSelected = '2018';
+    this.ChartMessageVisibility = false;
     this.populateBarChart();
     this.populatePieChart();
   }
@@ -87,6 +87,16 @@ export class ThresholdComponent implements OnInit {
     console.log('populate click event');
     this._dataService.getThresholdData({ 'type': 'threshold', 'month': this.thresholdMonthSelected, 'year': this.thresholdYearSelected }).subscribe((data) => {
       console.log(data);
+      this.ChartMessageVisibility = false;
+      if (data[0] !== undefined) {
+        data[0].exploded = true;
+        this.ChartMessageVisibility = false;
+      }
+      else{
+        console.log('dont show chart');
+        this.ChartMessageVisibility = true;        
+      }
+      this.pieLoaderVisibility = false;
       this.barLoaderVisibility = false;
       let chart = new CanvasJS.Chart("barChartContainer", {
         animationEnabled: true,
@@ -112,10 +122,19 @@ export class ThresholdComponent implements OnInit {
     });
   }
   populatePieChart() {
-    // this.pieLoaderVisibility = true;
+    this.pieLoaderVisibility = true;
     this._dataService.getThresholdData({ 'type': 'threshold_plant', 'month': this.thresholdMonthSelected, 'year': this.thresholdYearSelected }).subscribe((data) => {
       console.log(data);
-      data[0].exploded = true;
+      this.ChartMessageVisibility = false;
+      if (data[0] !== undefined) {
+        data[0].exploded = true;
+        this.ChartMessageVisibility = false;
+      }
+      else{
+        console.log('dont show chart');
+        this.ChartMessageVisibility = true;        
+      }
+      this.pieLoaderVisibility = false;
       let chart = new CanvasJS.Chart("pieChartContainer", {
         theme: "light2",
         animationEnabled: true,

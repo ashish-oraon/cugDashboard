@@ -10,6 +10,7 @@ import { CugAllocationComponent } from './cug-allocation/cug-allocation.componen
 import { ThresholdComponent } from './threshold/threshold.component';
 import { OrphanComponent } from './orphan/orphan.component';
 import { UploadComponent } from './upload/upload.component';
+import { BilldataComponent } from './billdata/billdata.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UploadComponent } from './upload/upload.component';
     CugAllocationComponent,
     ThresholdComponent,
     OrphanComponent,
-    UploadComponent
+    UploadComponent,
+    BilldataComponent
   ],
   imports: [
     BrowserModule,

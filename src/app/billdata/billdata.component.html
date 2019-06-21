@@ -1,0 +1,102 @@
+<div class="container-fluid bg-primary py-4">
+  <div class="row">
+    <div class="col-sm-3">
+      <label for="" class="text-white">Select Month</label>
+      <select class="form-control" [(ngModel)]="billMonthSelected" (change)=populateBillTable()>
+        <option [value]="month.value" *ngFor="let month of months">{{month.title}}</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <label for="" class="text-white">Select Year</label>
+      <select name="" class="form-control" [(ngModel)]="billYearSelected" (change)=populateBillTable()>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <label for="" class="text-white">Report Type</label>
+      <select class="form-control" [(ngModel)]="reportType" name="table_type" (change)=populateBillTable()>
+        <option value="bill">ALL</option>
+        <option value="thresholdBreached">Only Breached</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <label for="" class="text-white">Select Stauts</label> 
+      <select class="form-control" [(ngModel)]="employeeStatus" name="table_status" (change)=populateBillTable()>
+        <option value="all">All</option>
+        <option value="Active">Active</option>
+        <option value="Separate" selected="">Retired</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
+<div class="table-responsive p-2" id="billTable" style="min-height:200px;height:350px; overflow-y: scroll;">
+  <table class="table table-less">
+    <thead>
+      <tr>
+        <th>Sl</th>
+        <th>Status</th>
+        <th>Name</th>
+        <th>Emp_ID</th>
+        <th>Location</th>
+        <th>Type</th>
+        <th>Mobile</th>
+        <th>Total Invoice</th>
+        <th>Waiver</th>
+        <th>Paybale</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      <ng-container *ngIf="tableData.total_count != -1">
+        <tr *ngFor="let row of tableData.items; let i = index">
+          <td>
+            {{i+1}}
+          </td>
+          <td>
+            {{this.employeeStatus}}
+          </td>
+          <td>
+            {{row.emp_name}}
+          </td>
+          <td>
+            {{row.emp_id}}
+          </td>
+          <td>
+            {{row.emp_location}}
+          </td>
+          <td>
+            {{row.type}}
+          </td>
+          <td>
+            {{row.mobile_number}}
+          </td>
+          <td>
+            {{row.total_invoice}}
+          </td>
+          <td>
+            {{row.total_waiver}}
+          </td>
+          <td>
+            {{row.total_payable}}
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example" class="pointer-cursor">
+    <ul class="pagination justify-content-end">
+      <li class="page-item page-prev" *ngIf="page > 1" (click)=triggerpagination(page-1)><a
+          class="page-link">Previous</a>
+      </li>
+      <li class="page-item active" (click)=triggerpagination(page)><a class="page-link">{{page}}</a></li>
+      <li class="page-item" *ngIf="tableData.total_count != -1 && tableData.total_count >= 10"
+        (click)=triggerpagination(page+1)><a class="page-link">{{page+1}}</a></li>
+      <li class="page-item" *ngIf="tableData.total_count != -1 && tableData.total_count >= 10"
+        (click)=triggerpagination(page+1)><a class="page-link">Next</a></li>
+
+    </ul>
+  </nav>
+</div>
